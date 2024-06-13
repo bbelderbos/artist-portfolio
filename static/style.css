@@ -7,26 +7,106 @@ body {
     flex-direction: column;
     min-height: 100vh;
 }
+
 .container {
     flex: 1;
     max-width: 800px;
     margin: auto;
     padding: 20px;
 }
+
 header {
     background: #f4f4f4;
     padding: 10px 0;
     text-align: center;
 }
+
+nav {
+    background: #e0e0e0;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+nav a {
+    color: #333;
+    text-decoration: none;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+nav a.active {
+    background: #ccc;
+    font-weight: bold;
+}
+
+nav a:hover {
+    background: #bbb;
+}
+
 footer {
     background: #f4f4f4;
     padding: 10px 0;
     text-align: center;
 }
+
 .image-container {
     text-align: center;
 }
+
 .image-container img {
     max-width: 100%;
     height: auto;
 }
+
+/* Lightbox styles */
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.lightbox:target {
+    display: block;
+}
+
+.lightbox-content {
+    position: relative;
+    margin: 10% auto;
+    padding: 20px;
+    width: 80%;
+    max-width: 700px;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.lightbox-content img {
+    width: 100%;
+    height: auto;
+}
+
+.close-lightbox {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: #aaa;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.close-lightbox:hover,
+.close-lightbox:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+

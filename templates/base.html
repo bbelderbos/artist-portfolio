@@ -7,13 +7,20 @@
 </head>
 <body>
     <header>
-        <h1>Artist Portfolio</h1>
+      <h1>Artist Portfolio</h1>
     </header>
+
+    <nav>
+      <a href="/about" class="{% if current_page == "about" %}active{% endif %}">About the Artist</a>
+      <a href="/portfolio" class="{% if current_page == "portfolio" %}active{% endif %}">Portfolio</a>
+    </nav>
+
     <div class="container">
-        {% block content %}{% endblock %}
+      {% block content %}{% endblock %}
     </div>
+
     <footer>
-        <p>&copy; 2024+ Artist Portfolio</p>
+      <p>&copy; 2024+ Artist Portfolio</p>
     </footer>
 </body>
 </html>

@@ -3,15 +3,19 @@
 {% block title %}Portfolio{% endblock %}
 
 {% block content %}
-  <h1>Portfolio</h1>
 
-  <p>Here are some of Joe Doe's latest works:</p>
-
-  <div class="image-container">
-    {% for url in image_urls %}
-      <img src="{{ url }}" alt="Artwork">
+<div class="image-container">
+    {% for (full_image, thumbnail) in images %}
+        <a href="#img{{ loop.index }}">
+            <img src="{{ thumbnail }}" alt="Artwork">
+        </a>
+        <div class="lightbox" id="img{{ loop.index }}">
+            <div class="lightbox-content">
+                <a href="#" class="close-lightbox">&times;</a>
+                <img src="{{ full_image }}" alt="Artwork">
+            </div>
+        </div>
     {% endfor %}
-  </div>
-
+</div>
 {% endblock %}
 
