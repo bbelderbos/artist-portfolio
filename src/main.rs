@@ -17,7 +17,7 @@ async fn main() {
     let config = Arc::new(Config { aws_s3_bucket });
 
     let app = Router::new()
-        .route("/about", get(handlers::about_handler))
+        .route("/", get(handlers::about_handler))
         .route("/portfolio", get(handlers::portfolio_handler))
         .nest_service("/static", ServeDir::new("static"))
         .layer(Extension(config.clone()));

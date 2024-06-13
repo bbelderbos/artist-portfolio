@@ -20,7 +20,7 @@ pub async fn about_handler(Extension(config): Extension<Arc<Config>>) -> Result<
     let image_key = "artist.png";
     let image_url = format!("https://{}.s3.amazonaws.com/{}", config.aws_s3_bucket, image_key);
 
-    let template = AboutTemplate { image_url, current_page: "about" };
+    let template = AboutTemplate { image_url, current_page: "home" };
     match template.render() {
         Ok(rendered) => Ok(Html(rendered)),
         Err(_) => Err(StatusCode::INTERNAL_SERVER_ERROR),
