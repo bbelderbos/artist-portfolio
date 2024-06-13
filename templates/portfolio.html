@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portfolio</title>
+</head>
+<body>
+    <h1>Portfolio</h1>
+    <div id="image-gallery">
+        {% for url in image_urls %}
+            <img src="{{ url }}" alt="Image" style="max-width: 200px; margin: 10px;"/>
+        {% endfor %}
+    </div>
+</body>
+</html>
+
