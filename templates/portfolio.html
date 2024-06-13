@@ -3,11 +3,15 @@
 {% block title %}Portfolio{% endblock %}
 
 {% block content %}
-<h1>Portfolio</h1>
-<div class="image-container">
+  <h1>Portfolio</h1>
+
+  <p>Here are some of Joe Doe's latest works:</p>
+
+  <div class="image-container">
     {% for url in image_urls %}
-        <img src="{{ url }}" alt="Artwork">
+      <img src="{{ url }}" alt="Artwork">
     {% endfor %}
-</div>
+  </div>
+
 {% endblock %}
 

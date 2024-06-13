@@ -3,7 +3,7 @@ mod s3;
 
 use axum::{Router, routing::get, extract::Extension};
 use dotenv::dotenv;
-use std::net::SocketAddr;
+use tower_http::services::ServeDir;
 use tracing_subscriber;
 use std::sync::Arc;
 
@@ -19,15 +19,12 @@ async fn main() {
     let app = Router::new()
         .route("/about", get(handlers::about_handler))
         .route("/portfolio", get(handlers::portfolio_handler))
+        .nest_service("/static", ServeDir::new("static"))
         .layer(Extension(config.clone()));
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
-
-    tracing::info!("Listening on {}", addr);
-    axum::Server::bind(&addr)
-        .serve(app.into_make_service())
-        .await
-        .unwrap();
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    tracing::info!("Listening on {}", listener.local_addr().unwrap());
+    axum::serve(listener, app).await.unwrap();
 }
 
 #[derive(Clone)]
