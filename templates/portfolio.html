@@ -1,16 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Portfolio</title>
-</head>
-<body>
-    <h1>Portfolio</h1>
-    <div id="image-gallery">
-        {% for url in image_urls %}
-            <img src="{{ url }}" alt="Image" style="max-width: 200px; margin: 10px;"/>
-        {% endfor %}
-    </div>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Portfolio{% endblock %}
+
+{% block content %}
+<h1>Portfolio</h1>
+<div class="image-container">
+    {% for url in image_urls %}
+        <img src="{{ url }}" alt="Artwork">
+    {% endfor %}
+</div>
+{% endblock %}
 

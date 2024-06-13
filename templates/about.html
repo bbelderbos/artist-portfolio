@@ -1,13 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>About the Artist</title>
-</head>
-<body>
-    <h1>About the Artist</h1>
-    <p>Details about the artist...</p>
-    <img src="{{ image_url }}" alt="About Image"/>
-</body>
-</html>
+{% extends "base.html" %}
 
+{% block title %}About the Artist{% endblock %}
+
+{% block content %}
+  <h1>About the Artist</h1>
+  <p>Details about the artist...</p>
+  <div class="image-container">
+      <img src="{{ image_url }}" alt="Artist Image">
+  </div>
+  <p>
+      John Doe is a contemporary artist known for his abstract paintings and vibrant use of color.
+      With a career spanning over two decades, John has exhibited his work in galleries and museums around the world.
+      His unique style combines traditional techniques with modern influences, creating a dynamic and captivating visual experience.
+  </p>
+  <p>
+      Born and raised in New York City, John developed a passion for art at a young age. He studied at the prestigious
+      School of Visual Arts and graduated with honors. Over the years, John has explored various mediums, including
+      painting, sculpture, and digital art. His work often reflects themes of nature, emotion, and the human condition.
+  </p>
+  <p>
+      John's artwork has been featured in numerous publications, and he has received several awards for his contributions
+      to the art world. In addition to his artistic practice, John is also an avid educator, conducting workshops and
+      lectures to inspire the next generation of artists.
+  </p>
+{% endblock %}
