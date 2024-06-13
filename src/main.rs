@@ -22,7 +22,10 @@ async fn main() {
         .nest_service("/static", ServeDir::new("static"))
         .layer(Extension(config.clone()));
 
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    let port = std::env::var("PORT").unwrap_or_else(|_| "3000".to_string());
+    let addr = std::env::var("BIND_ADDR").unwrap_or_else(|_| "0.0.0.0".to_string());
+    let bind_addr = format!("{}:{}", addr, port);
+    let listener = tokio::net::TcpListener::bind(&bind_addr).await.unwrap();
     tracing::info!("Listening on {}", listener.local_addr().unwrap());
     axum::serve(listener, app).await.unwrap();
 }
