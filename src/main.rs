@@ -1,39 +1,36 @@
 mod handlers;
 mod s3;
-mod config;
 
 use axum::{Router, routing::get, extract::Extension};
-use config::Config;
+use dotenv::dotenv;
 use std::net::SocketAddr;
-use std::sync::Arc;
 use tracing_subscriber;
+use std::sync::Arc;
 
 #[tokio::main]
 async fn main() {
-    // Load environment variables
-    dotenv::dotenv().ok();
-    // Initialize tracing subscriber
+    dotenv().ok();
     tracing_subscriber::fmt::init();
 
     // Initialize configuration
-    let config = Arc::new(Config::from_env());
+    let aws_s3_bucket = std::env::var("AWS_S3_BUCKET").expect("AWS_S3_BUCKET must be set");
+    let config = Arc::new(Config { aws_s3_bucket });
 
-    // Build the application with routes and layers
     let app = Router::new()
         .route("/about", get(handlers::about_handler))
         .route("/portfolio", get(handlers::portfolio_handler))
-        .layer(Extension(config));
+        .layer(Extension(config.clone()));
 
-    // Define the address to run the server on
     let addr = SocketAddr::from(([127, 0, 0, 1], 3000));
 
-    // Log the server start message
     tracing::info!("Listening on {}", addr);
-
-    // Run the server
     axum::Server::bind(&addr)
         .serve(app.into_make_service())
         .await
         .unwrap();
 }
 
+#[derive(Clone)]
+pub struct Config {
+    pub aws_s3_bucket: String,
+}

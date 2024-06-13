@@ -4,7 +4,7 @@ use axum::{
     http::StatusCode,
     response::Html,
 };
-use crate::config::Config;
+use crate::Config;
 use crate::s3::get_images;
 use std::sync::Arc;
 
@@ -32,7 +32,7 @@ struct PortfolioTemplate {
 }
 
 pub async fn portfolio_handler(Extension(config): Extension<Arc<Config>>) -> Result<Html<String>, StatusCode> {
-    let images = get_images(&config).await.unwrap_or_else(|_| vec![]);
+    let images = get_images(&config.aws_s3_bucket).unwrap_or_else(|_| vec![]);
     let template = PortfolioTemplate { image_urls: images };
 
     match template.render() {
